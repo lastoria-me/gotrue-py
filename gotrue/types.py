@@ -106,7 +106,7 @@ class Session(BaseModel):
     token_type: str
     user: User
 
-    @root_validator
+    @root_validator(pre=False, skip_on_failure=True)
     def validator(cls, values: dict) -> dict:
         expires_in = values.get("expires_in")
         if expires_in and not values.get("expires_at"):
